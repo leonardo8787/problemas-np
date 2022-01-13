@@ -1,5 +1,5 @@
 #include <stdio.h>
-int matrix[25][25], visited_cities[10], limit, cost = 0;
+int matrix[25][25], visited_cities[25], limit, cost = 0;
 
 int tsp(int c) {
     int count, nearest_city = 999;
