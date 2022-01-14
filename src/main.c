@@ -31,7 +31,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define VERTICES 4
+#define VERTICES 10
 #define INFINITO 429496729
 
 int tempSolucao[VERTICES];
@@ -41,10 +41,23 @@ int valorMelhorSolucao = INFINITO;
 int valorSolucaoAtual = 0;
 
 int matriz[VERTICES][VERTICES]  = {
-                                {0,   10, 15,  20},
-                                {10,   0, 35,  25},
-                                {15,  35,  0,  30},
-                                {20,  25, 30,   0}};
+    {0,         18,         30,         7,          INFINITO,   INFINITO,   INFINITO,   INFINITO,   INFINITO,   INFINITO},
+    {18,        0,          25,         INFINITO,   20,         30,         INFINITO,   INFINITO,   INFINITO,   INFINITO},
+    {30,        25,         0,          INFINITO,   30,         20,         INFINITO,   INFINITO,   60,         INFINITO},
+    {7,         INFINITO,   INFINITO,   0,          40,         INFINITO,   INFINITO,   INFINITO,   17,         INFINITO},
+    {INFINITO,  20,         30,         40,         0,          10,         5,          INFINITO,   INFINITO,   INFINITO},
+    {INFINITO,  30,         20,         INFINITO,   10,         0,          9,          INFINITO,   INFINITO,   60},
+    {INFINITO,  INFINITO,   INFINITO,   INFINITO,   5,          9,          0,          INFINITO,   50,         50},
+    {INFINITO,  INFINITO,   INFINITO,   INFINITO,   4,          INFINITO,   INFINITO,   0,          40,         38},
+    {INFINITO,  INFINITO,   50,         17,         INFINITO,   INFINITO,   42,         37,         0,          20},
+    {INFINITO,  INFINITO,   INFINITO,   INFINITO,   INFINITO,   60,         37,         38,         20,         0}
+};
+
+// int matriz[VERTICES][VERTICES]  = {
+//                                 {0,   10, 15,  20},
+//                                 {10,   0, 35,  25},
+//                                 {15,  35,  0,  30},
+//                                 {20,  25, 30,   0}};
 
 // int matriz[VERTICES][VERTICES]  = {{         0,          2,   INFINITO, 3,          6 },
 // 								  {          2,          0,          4, 3,   INFINITO },
@@ -109,9 +122,9 @@ int main(){
 
 	printf("Caminho mínimo: %d\n", valorMelhorSolucao);
 	for (int i = 0; i < VERTICES; i++){
-		printf("%d, ", melhorSolucao[i]);
+		printf("%d, ", melhorSolucao[i] + 1);
 	}
-	printf("%d, ", melhorSolucao[0]);
+	printf("%d", melhorSolucao[0] + 1);
 	printf("\n\n");
 }
 
