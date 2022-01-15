@@ -8,7 +8,7 @@
 // #define VERTICES 4
 #define INFINITO 429496729
 
-void resultado();
+void imprimir();
 void caixeiroViajanteAux(int x);
 void caixeiroViajante(int inicial);
 void iniciaVetores(int tamanho);

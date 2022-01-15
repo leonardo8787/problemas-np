@@ -32,12 +32,15 @@
 #include <time.h>
 #include "caixeiro.h"
 
+int menu();
+void resultado(Lista *l, int tam);
 
 int main(){
 	double inicio = clock();
 	
 	Lista l;
 	Item item;
+	int op, tam;
 
 	int matriz1[4][4] = {
 		{0,   10, 15,  20},
@@ -60,6 +63,14 @@ int main(){
 	};
 
 	int matriz3[5][5] = {
+		{0,7,5,9,4},
+		{7,0,2,8,1},
+		{5,2,0,10,6},
+		{9,8,10,0,3},
+		{4,1,6,3,0}
+	};
+
+	int matriz3_1[5][5] = {
 		{0,7,5,INFINITO,4},
 		{7,0,2,8,1},
 		{5,2,0,10,6},
@@ -109,24 +120,135 @@ int main(){
 		{381, 427, 443, 489, 487, 222, 235, 478, 304, 0} 
 	};
 
-	// do {
+	do {
+		system("clear || cls");
+		op = menu();
 		FLVazia(&l);
 
-		int tam = sizeof(matriz1[0]) / sizeof(int);
+		switch(op) {
+			case 1:
+				tam = sizeof(matriz1[0]) / sizeof(int);
 
-		for(int i = 0; i < tam; i++) {
-			for(int j = 0; j < tam; j++) {
-				item.valor = matriz1[i][j];
-				LInsere(&l, item);
-			}
+				for(int i = 0; i < tam; i++) {
+					for(int j = 0; j < tam; j++) {
+						item.valor = matriz1[i][j];
+						LInsere(&l, item);
+					}
+				}
+				resultado(&l, tam);
+			break;
+			case 2:
+				tam = sizeof(matriz2[0]) / sizeof(int);
+
+				for(int i = 0; i < tam; i++) {
+					for(int j = 0; j < tam; j++) {
+						item.valor = matriz2[i][j];
+						LInsere(&l, item);
+					}
+				}
+				resultado(&l, tam);
+			break;
+			case 3:
+				tam = sizeof(matriz3[0]) / sizeof(int);
+				printf("%d\n", tam);
+
+				for(int i = 0; i < tam; i++) {
+					for(int j = 0; j < tam; j++) {
+						item.valor = matriz3[i][j];
+						LInsere(&l, item);
+					}
+				}
+				resultado(&l, tam);
+			break;
+			case 4:
+				tam = sizeof(matriz3_1[0]) / sizeof(int);
+				printf("%d\n", tam);
+
+				for(int i = 0; i < tam; i++) {
+					for(int j = 0; j < tam; j++) {
+						item.valor = matriz3[i][j];
+						LInsere(&l, item);
+					}
+				}
+				resultado(&l, tam);
+			break;
+			case 5:
+				tam = sizeof(matriz4[0]) / sizeof(int);
+				printf("%d\n", tam);
+
+				for(int i = 0; i < tam; i++) {
+					for(int j = 0; j < tam; j++) {
+						item.valor = matriz4[i][j];
+						LInsere(&l, item);
+					}
+				}
+				resultado(&l, tam);
+			break;
+			case 6:
+				tam = sizeof(matriz5[0]) / sizeof(int);
+				
+				for(int i = 0; i < tam; i++) {
+					for(int j = 0; j < tam; j++) {
+						item.valor = matriz5[i][j];
+						LInsere(&l, item);
+					}
+				}
+				resultado(&l, tam);
+			break;
+			case 7:
+				tam = sizeof(matriz6[0]) / sizeof(int);
+
+				for(int i = 0; i < tam; i++) {
+					for(int j = 0; j < tam; j++) {
+						item.valor = matriz6[i][j];
+						LInsere(&l, item);
+					}
+				}
+				resultado(&l, tam);
+			break;
+			
+			case 0:
+				printf("O programa sera finalizado!\n");
+				return EXIT_SUCCESS;
+			default:
+				printf("Opcao invalida!\n");
 		}
-		iniciaVetores(tam);
-	// } while();
+		system("read -p \"\nPressione enter para continuar...\" continue");
+	} while(op != 0);
 
-	preencheMatriz(&l);
 	
-	caixeiroViajante(0);
-	resultado();
+
 	printf("\n\n");
 	printf("tempo: %lf\n", (clock() - inicio) / (double)CLOCKS_PER_SEC);
+
+	return EXIT_SUCCESS;
+}
+
+int menu() {
+	int op;
+
+	printf("====================\n");
+	printf("   MENU DE OPCOES\n");
+	printf("====================\n\n");
+	
+	printf("1 - Matriz 1   -> 4  entradas - ok\n");
+	printf("2 - Matriz 2   -> 10 entradas - ok\n");
+	printf("3 - Matriz 3   -> 5  entradas - ok\n");
+	printf("4 - Matriz 3_1 -> 5  entradas - ok: caminho entre (A e D) retirado\n");
+	printf("5 - Matriz 4   -> 5  entradas - ok\n");
+	printf("6 - Matriz 5   -> 18 entradas - errada\n");
+	printf("7 - Matriz 6   -> 10 entradas\n");
+	printf("0 - Sair\n\n");
+
+	printf("Escolha uma opção: ");
+	scanf("%d", &op);
+
+	return op;
+}
+
+void resultado(Lista *l, int tam) {
+	iniciaVetores(tam);
+	preencheMatriz(l);
+	caixeiroViajante(0);
+	imprimir();
 }
