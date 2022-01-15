@@ -5,10 +5,10 @@
 
 #include "lista.h"
 
-// #define VERTICES 4
+#define VERTICES 10
 #define INFINITO 429496729
 
-void imprimir();
+void resultado();
 void caixeiroViajanteAux(int x);
 void caixeiroViajante(int inicial);
 void iniciaVetores(int tamanho);
