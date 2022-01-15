@@ -1,81 +1,46 @@
 #include "caixeiro.h"
 
-// int *tempSolucao;
-// int *melhorSolucao;
-// bool *visitados;
-
-int tempSolucao[VERTICES];
-int melhorSolucao[VERTICES];
-bool visitados[VERTICES];
+int *tempSolucao;
+int *melhorSolucao;
+bool *visitados;
 int valorMelhorSolucao = INFINITO;
 int valorSolucaoAtual = 0;
 
-// int VERTICES = 0;
+int VERTICES = 0;
 
-// int matriz_aux[VERTICES][VERTICES] = {
-// 	{0,20,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,39,INFINITO,INFINITO,INFINITO,29,37,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO},
-// 	{20,0,25,INFINITO,INFINITO,INFINITO,INFINITO,28,INFINITO,INFINITO,INFINITO,39,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO},
-// 	{INFINITO,25,0,25,INFINITO,INFINITO,INFINITO,30,INFINITO,INFINITO,INFINITO,INFINITO,54,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO},
-// 	{INFINITO,INFINITO,25,0,39,32,42,INFINITO,23,33,INFINITO,INFINITO,INFINITO,35,INFINITO,INFINITO,INFINITO,INFINITO},
-// 	{INFINITO,INFINITO,INFINITO,39,0,12,26,INFINITO,INFINITO,19,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO},
-// 	{INFINITO,INFINITO,INFINITO,32,12,0,17,INFINITO,INFINITO,35,30,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO},
-// 	{INFINITO,INFINITO,INFINITO,42,26,17,0,INFINITO,INFINITO,INFINITO,38,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO},
-// 	{39,28,30,INFINITO,INFINITO,INFINITO,INFINITO,0,INFINITO,INFINITO,INFINITO,25,22,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO},
-// 	{INFINITO,INFINITO,INFINITO,23,INFINITO,INFINITO,INFINITO,INFINITO,0,26,INFINITO,INFINITO,34,56,INFINITO,43,INFINITO,INFINITO},
-// 	{INFINITO,INFINITO,INFINITO,33,19,35,INFINITO,INFINITO,26,0,24,INFINITO,INFINITO,30,19,INFINITO,INFINITO,INFINITO},
-// 	{INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,30,38,INFINITO,INFINITO,24,0,INFINITO,INFINITO,INFINITO,26,INFINITO,INFINITO,36},
-// 	{29,39,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,25,INFINITO,INFINITO,INFINITO,0,27,INFINITO,INFINITO,43,INFINITO,INFINITO},
-// 	{37,INFINITO,54,INFINITO,INFINITO,INFINITO,INFINITO,22,34,INFINITO,INFINITO,27,0,24,INFINITO,19,INFINITO,INFINITO},
-// 	{INFINITO,INFINITO,INFINITO,56,INFINITO,INFINITO,INFINITO,INFINITO,35,30,INFINITO,INFINITO,24,0,20,19,17,INFINITO},
-// 	{INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,19,26,INFINITO,INFINITO,20,0,INFINITO,18,21},
-// 	{INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,43,INFINITO,INFINITO,43,19,19,INFINITO,0,19,INFINITO},
-// 	{INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,17,18,26,0,15},
-// 	{INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,36,INFINITO,INFINITO,INFINITO,21,INFINITO,15,0}
-// };
-
-int matriz[10][10]  = {
-		{0,         18,         30,         7,          INFINITO,   INFINITO,   INFINITO,   INFINITO,   INFINITO,   INFINITO},
-		{18,        0,          25,         INFINITO,   20,         30,         INFINITO,   INFINITO,   INFINITO,   INFINITO},
-		{30,        25,         0,          INFINITO,   30,         20,         INFINITO,   INFINITO,   60,         INFINITO},
-		{7,         INFINITO,   INFINITO,   0,          40,         INFINITO,   INFINITO,   INFINITO,   17,         INFINITO},
-		{INFINITO,  20,         30,         40,         0,          10,         5,          INFINITO,   INFINITO,   INFINITO},
-		{INFINITO,  30,         20,         INFINITO,   10,         0,          9,          INFINITO,   INFINITO,   60},
-		{INFINITO,  INFINITO,   INFINITO,   INFINITO,   5,          9,          0,          INFINITO,   50,         50},
-		{INFINITO,  INFINITO,   INFINITO,   INFINITO,   4,          INFINITO,   INFINITO,   0,          40,         38},
-		{INFINITO,  INFINITO,   50,         17,         INFINITO,   INFINITO,   42,         37,         0,          20},
-		{INFINITO,  INFINITO,   INFINITO,   INFINITO,   INFINITO,   60,         37,         38,         20,         0}
-	};
-
-// int **matriz;
+int **matriz;
 
 void preencheMatriz(Lista *l) {
-	// matriz = (int**)malloc(VERTICES * sizeof(int));
-	// for (int i = 0; i < VERTICES; i++) {
-	// 	matriz[i] = (int*)malloc(VERTICES * sizeof(int));
-	// 	for (int j = 0; j < VERTICES; j++) {
-	// 		matriz[i][j] = matriz_aux[i][j];
-	// 	}
-	// }
+	Block *aux;
+	int i=0, j=0;
+	bool controle = true;
 
-	// Block *aux;
-	// int i=0, j=0;
-	// bool controle = true;
+	aux = l->first->prox;
+	matriz = (int**)malloc(VERTICES * sizeof(int*));
+	while(i != VERTICES && j != VERTICES) {
+		if(controle) {
+			matriz[i] = (int*)malloc(VERTICES * sizeof(int));
+			controle = !controle;
+		}
+		matriz[i][j++] = aux->dado.valor;
 
-	// aux = l->first->prox;
-	// while(aux != NULL && i != VERTICES && j != VERTICES) {
-	// 	if(controle) {
-	// 		matriz[i] = (int*)malloc(VERTICES * sizeof(int));
-	// 		controle = !controle;
-	// 	}
-	// 	matriz[i][j++] = aux->dado.valor;
+		if(j == VERTICES) {
+			j = 0;
+			i++;
+			controle = !controle;
+		}
+		aux = aux->prox;
+	}
 
-	// 	if(j == VERTICES) {
-	// 		j = 0;
-	// 		i++;
-	// 		controle = !controle;
-	// 	}
-	// 	aux = aux->prox;
-	// }
+	for (int i = 0; i < VERTICES; i++) {
+		for (int j = 0; j < VERTICES; j++) {
+			if (matriz[i][j] == INFINITO)
+				printf("  - ");
+			else
+				printf("%3d ", matriz[i][j]);
+		}
+		printf("\n");
+	}
 }
 
 void caixeiroViajanteAux(int x) {
@@ -95,7 +60,7 @@ void caixeiroViajanteAux(int x) {
 		}
 		return;
 	}
-	printf("%d ", tempSolucao[x-1]);
+
 	int ultimo = tempSolucao[x-1]; // Ultimo recebe o número do último vértice que se encontra na solução temporária
 	// For que percorre todas as colunas da matriz na linha do último vértice do vetor solução temporária
 	for (int i = 0; i < VERTICES; i++) {
@@ -116,15 +81,18 @@ void caixeiroViajanteAux(int x) {
 void caixeiroViajante(int inicial) {
 	visitados[inicial] = true; // Marca o primeiro vértice como visitado (0)
 	tempSolucao[0] = inicial; // Coloca o vértice 0 na primeira posição do vetor de solução temporária
+	printf("\n");
 	caixeiroViajanteAux(1); // Chama o método auxiliar do caixeiro viajante
 }
 
 void iniciaVetores(int tamanho) {
-	// VERTICES = tamanho;
+	VERTICES = tamanho;
+	valorMelhorSolucao = INFINITO;
+	valorSolucaoAtual = 0;
 
-	// visitados = (bool*)malloc(VERTICES * sizeof(bool));
-	// tempSolucao = (int*)malloc(VERTICES * sizeof(int));
-	// melhorSolucao = (int*)malloc(VERTICES * sizeof(int));
+	visitados     = (bool*)realloc(visitados, VERTICES * sizeof(bool));
+	tempSolucao   = (int*) realloc(tempSolucao, VERTICES * sizeof(int));
+	melhorSolucao = (int*) realloc(melhorSolucao, VERTICES * sizeof(int));
 
 	for (int i = 0; i < VERTICES; i++) {
 		visitados[i] = false;
@@ -133,11 +101,19 @@ void iniciaVetores(int tamanho) {
 	}
 }
 
-void resultado() {
-    melhorSolucao[VERTICES] = melhorSolucao[0];
+void mallocar() {
+	visitados     = (bool*)malloc(VERTICES * sizeof(bool));
+	tempSolucao   = (int*) malloc(VERTICES * sizeof(int));
+	melhorSolucao = (int*) malloc(VERTICES * sizeof(int));
+}
+
+void imprimir() {
 
 	printf("Caminho mínimo: %d\n", valorMelhorSolucao);
-	for (int i = 0; i < VERTICES; i++){
-		printf("%d, ", melhorSolucao[i]+1);
+	
+	for (int i = 0; i < VERTICES; i++) {
+		printf("%d, ", melhorSolucao[i] + 1);
 	}
+
+	printf("%d\n", melhorSolucao[0] + 1);
 }
