@@ -2,15 +2,16 @@
 #define CAIXEIRO_H
 
 #include <stdbool.h>
-#include <stdio.h>
 
-#define VERTICES 4
+#include "lista.h"
+
+// #define VERTICES 4
 #define INFINITO 429496729
 
 void resultado();
 void caixeiroViajanteAux(int x);
 void caixeiroViajante(int inicial);
-void iniciaVetores();
-void preencheMatriz(int valor[][VERTICES]);
+void iniciaVetores(int tamanho);
+void preencheMatriz(Lista *l);
 
 #endif

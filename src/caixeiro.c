@@ -1,10 +1,15 @@
 #include "caixeiro.h"
 
-int tempSolucao[VERTICES];
-int melhorSolucao[VERTICES];
-bool visitados[VERTICES];
+int *tempSolucao;
+int *melhorSolucao;
+bool *visitados;
+// int tempSolucao[VERTICES];
+// int melhorSolucao[VERTICES];
+// bool visitados[VERTICES];
 int valorMelhorSolucao = INFINITO;
 int valorSolucaoAtual = 0;
+
+int VERTICES = 0;
 
 
 // int matriz[VERTICES][VERTICES] = {
@@ -28,14 +33,29 @@ int valorSolucaoAtual = 0;
 // 	{INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,INFINITO,36,INFINITO,INFINITO,INFINITO,21,INFINITO,15,0}
 // };
 
-int matriz[VERTICES][VERTICES];
+// int matriz[VERTICES][VERTICES];
+int **matriz;
 
-void preencheMatriz(int valor[VERTICES][VERTICES]) {
-    for (int i = 0; i < VERTICES; i++) {
-        for (int j = 0; j < VERTICES; j++) {
-            matriz[i][j] = valor[i][j];
-        }
-    }
+void preencheMatriz(Lista *l) {
+	Block *aux;
+	int i=0, j=0;
+	bool controle = true;
+
+	aux = l->first->prox;
+	while(aux != NULL && i != VERTICES && j != VERTICES) {
+		if(controle) {
+			matriz[i] = (int*)malloc(VERTICES * sizeof(int));
+			controle = !controle;
+		}
+		matriz[i][j++] = aux->dado.valor;
+
+		if(j == VERTICES) {
+			j = 0;
+			i++;
+			controle = !controle;
+		}
+		aux = aux->prox;
+	}
 }
 
 void caixeiroViajanteAux(int x) {
@@ -79,7 +99,15 @@ void caixeiroViajante(int inicial) {
 	caixeiroViajanteAux(1); // Chama o método auxiliar do caixeiro viajante
 }
 
-void iniciaVetores() {
+void iniciaVetores(int tamanho) {
+	VERTICES = tamanho;
+
+	visitados = (bool*)malloc(VERTICES * sizeof(bool));
+	tempSolucao = (int*)malloc(VERTICES * sizeof(int));
+	melhorSolucao = (int*)malloc(VERTICES * sizeof(int));
+
+	matriz = (int**)malloc(VERTICES * sizeof(int));
+
 	for (int i = 0; i < VERTICES; i++) {
 		visitados[i] = false;
 		tempSolucao[i] = -1;

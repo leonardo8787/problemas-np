@@ -35,7 +35,9 @@
 
 int main(){
 	double inicio = clock();
-	iniciaVetores();
+	
+	Lista l;
+	Item item;
 
 	int matriz1[4][4] = {
 		{0,   10, 15,  20},
@@ -107,13 +109,21 @@ int main(){
 		{381, 427, 443, 489, 487, 222, 235, 478, 304, 0} 
 	};
 
-	printf("%ld\n", sizeof(matriz1[0]) / sizeof(int));
-	printf("%ld\n", sizeof(matriz2[0]) / sizeof(int));
-	printf("%ld\n", sizeof(matriz3[0]) / sizeof(int));
-	printf("%ld\n", sizeof(matriz4[0]) / sizeof(int));
-	printf("%ld\n", sizeof(matriz5[0]) / sizeof(int));
+	// do {
+		FLVazia(&l);
 
-	preencheMatriz(matriz1);
+		int tam = sizeof(matriz1[0]) / sizeof(int);
+
+		for(int i = 0; i < tam; i++) {
+			for(int j = 0; j < tam; j++) {
+				item.valor = matriz1[i][j];
+				LInsere(&l, item);
+			}
+		}
+		iniciaVetores(tam);
+	// } while();
+
+	preencheMatriz(&l);
 	
 	caixeiroViajante(0);
 	resultado();
