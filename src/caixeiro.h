@@ -5,7 +5,6 @@
 
 #include "lista.h"
 
-// #define VERTICES 4
 #define INFINITO 429496729
 
 void imprimir();

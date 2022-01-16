@@ -1,33 +1,3 @@
-/*
-*	Problema do Caixeiro Viajante em C
-*	Utilizando uma matriz de distância para representar um grafo não direcionado.
-*	Objetivo: Encontrar o menor caminho que passe por todos os vértices sem repetir nenhum, e chegar novamente ao vértice de início
-*
-*                      6
-*                 (4)-----(0)
-*                 |  \    / \ 
-*                 |   \ 3/   \2 
-*                 |    \/     \ 
-*                3|    /\     (1)
-*                 |   / 3\   4/ |
-*                 |  /    \  /  |
-*                 (3)-----(2)   |
-*                  |   7        | 
-*                  |            | 3
-*                  --------------
-*
-*
-*   Matriz de Distância
-*       0  1  2  3  4 
-*    0  0  2  -  3  6
-*    1  2  0  4  3  -
-*    2  -  4  0  7  3
-*    3  3  3  7  0  3
-*    4  6  -  3  3  0
-*
-*
-*/
-
 #include <stdio.h>
 #include <time.h>
 #include "caixeiro.h"
@@ -120,6 +90,22 @@ int main(){
 		{381, 427, 443, 489, 487, 222, 235, 478, 304, 0} 
 	};
 
+	int matriz7[13][13] = {
+		{0, 2451, 713, 1018, 1631, 1374, 2408, 213, 2571, 875, 1420, 2145, 1972},
+        {2451, 0, 1745, 1524, 831, 1240, 959, 2596, 403, 1589, 1374, 357, 579},
+        {713, 1745, 0, 355, 920, 803, 1737, 851, 1858, 262, 940, 1453, 1260},
+        {1018, 1524, 355, 0, 700, 862, 1395, 1123, 1584, 466, 1056, 1280, 987},
+        {1631, 831, 920, 700, 0, 663, 1021, 1769, 949, 796, 879, 586, 371},
+        {1374, 1240, 803, 862, 663, 0, 1681, 1551, 1765, 547, 225, 887, 999},
+        {2408, 959, 1737, 1395, 1021, 1681, 0, 2493, 678, 1724, 1891, 1114, 701},
+        {213, 2596, 851, 1123, 1769, 1551, 2493, 0, 2699, 1038, 1605, 2300, 2099},
+        {2571, 403, 1858, 1584, 949, 1765, 678, 2699, 0, 1744, 1645, 653, 600},
+        {875, 1589, 262, 466, 796, 547, 1724, 1038, 1744, 0, 679, 1272, 1162},
+        {1420, 1374, 940, 1056, 879, 225, 1891, 1605, 1645, 679, 0, 1017, 1200},
+        {2145, 357, 1453, 1280, 586, 887, 1114, 2300, 653, 1272, 1017, 0, 504},
+        {1972, 579, 1260, 987, 371, 999, 701, 2099, 600, 1162, 1200, 504, 0}};
+
+
 	mallocar();
 	do {
 		system("clear || cls");
@@ -205,6 +191,17 @@ int main(){
 				}
 				resultado(&l, tam);
 			break;
+			case 8:
+				tam = sizeof(matriz7[0]) / sizeof(int);
+
+				for(int i = 0; i < tam; i++) {
+					for(int j = 0; j < tam; j++) {
+						item.valor = matriz7[i][j];
+						LInsere(&l, item);
+					}
+				}
+				resultado(&l, tam);
+			break;
 			
 			case 0:
 				printf("O programa sera finalizado!\n");
@@ -232,6 +229,7 @@ int menu() {
 	printf("5 - Matriz 4   -> 5  vértices\n");
 	printf("6 - Matriz 5   -> 18 vértices\n");
 	printf("7 - Matriz 6   -> 10 vértices\n");
+	printf("8 - Matriz 7   -> 13 vértices\n");
 	printf("0 - Sair\n\n");
 
 	printf("Escolha uma opção: ");

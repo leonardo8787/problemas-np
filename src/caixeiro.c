@@ -35,9 +35,9 @@ void preencheMatriz(Lista *l) {
 	for (int i = 0; i < VERTICES; i++) {
 		for (int j = 0; j < VERTICES; j++) {
 			if (matriz[i][j] == INFINITO)
-				printf("  - ");
+				printf("   - ");
 			else
-				printf("%3d ", matriz[i][j]);
+				printf("%4d ", matriz[i][j]);
 		}
 		printf("\n");
 	}
@@ -47,9 +47,9 @@ void caixeiroViajanteAux(int x) {
 	// Se o valor da solução atual já estiver maior que o valor da melhor solução já para, pois já não pode mais ser a melhor solução
 	if( valorSolucaoAtual > valorMelhorSolucao )
 		return;
-
 	if( x == VERTICES ) { // Se x == VERTICES significa que o vetor da solução temporária está completo
 		int distancia = matriz[tempSolucao[x-1]][tempSolucao[0]];
+		
 		// Se encontrou uma solução melhor/menor
 		if( distancia < INFINITO && valorSolucaoAtual + distancia < valorMelhorSolucao ) {
 			valorMelhorSolucao = valorSolucaoAtual + distancia; // Substitui a melhor solução pela melhor encontrada agora
