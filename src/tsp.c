@@ -68,7 +68,7 @@ void permutation(int *vertex, int start, int end, int **graph, int num_vertices,
 		if(current_combinacoes % num == 0) {//imprime porcentagem a cada 10000 combinaçoes realizadas
 			system("cls || clear");
 			printf("------- INFO durante execução -------\n");
-			printf("Porcentagem concluída:\t%2.Lf%% \n", percentageExecution());
+			printf("\nPorcentagem concluída:\t%2.Lf%% \n", percentageExecution());
 			printf("Combinações realizadas:\t%ld \n", current_combinacoes);
 		}
 		return;
@@ -124,4 +124,42 @@ void Inicialize(int *vertex, int *cities, int *min_path, int num_vertices) {
 		cities[i] = i;
 		min_path[i] = i;
 	}
+	min_pathweight = INT_MAX;
+	current_combinacoes = 0;
+}
+
+void printMatrix(int **matrix, int num_vertices) {
+	printf("\nMatrix:\n\n");
+	for(int i=0; i<num_vertices; i++) {// matriz
+		for(int j=0; j<num_vertices; j++) {
+			printf("%6d ", matrix[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+void printVetores(int *vertex, int *cities, int *min_path, int num_vertices) {
+	char cityName[][25] = {"Cidade 1", "Cidade 2", "Cidade 3", "Cidade 4", "Cidade 5", "Cidade 6", "Cidade 7", "Cidade 8", "Cidade 9", "Cidade 10", "Cidade 11", "Cidade 12", "Cidade 13", "Cidade 14", "Cidade 15", "Cidade 16", "Cidade 17", "Cidade 18"};
+	
+	printf("\nCaminho:\t");
+	for(int i=0; i<num_vertices; i++){ printf("%d ", min_path[i]); }//caminho
+	
+	printf("\n\n%s -> ", cityName[cities[num_vertices-1]]);//ultima cidade no array é o ponto de partida
+	
+	for(int i=0; i<num_vertices; i++) {//cidades
+		if(i == num_vertices-1)
+			printf("%s", cityName[cities[i]]);
+		else {
+			printf("%s -> ", cityName[cities[i]]);
+		}
+	}
+}
+
+void result(double time_spent) {
+	printf("\nCaminho mais curto passando por todos os vértices:\t%d \n", getMinPathWeight());
+
+	printf("\nPorcentagem concluída:\t%2.Lf%%", percentageExecution());
+	printf("\nCombinações realizadas:\t%ld", getCurrentCombinacoes());
+	printf("\nTempo de execução:\t%lf seconds", time_spent);
+	printf("\n");
 }

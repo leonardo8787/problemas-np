@@ -15,6 +15,9 @@ void Inicialize(int *vertex, int *cities, int *min_path, int num_vertices);
 void travelingSalesmanProblem(int **graph, int *vertex, int num_vertices, int *cities, int *min_path);
 void permutation(int *vertex, int start, int end, int **graph, int num_vertices, int *cities, int *min_path);
 void swap(int *a, int *b);
+void result(double time_spent);
+void printMatrix(int **matrix, int num_vertices);
+void printVetores(int *vertex, int *cities, int *min_path, int num_vertices);
 
 int getMinPathWeight();
 long int getCurrentCombinacoes();
