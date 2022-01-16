@@ -1,8 +1,14 @@
 #include <stdio.h>
 #include <time.h>
+
 #include "caixeiro.h"
+#include "tsp.h"
 
 int menu();
+int bruteForceMenu();
+int buscaRapidaMenu();
+
+void bruteForce(int op);
 void resultado(Lista *l, int tam);
 
 int main(){
@@ -11,6 +17,7 @@ int main(){
 	Lista l;
 	Item item;
 	int op, tam;
+	int op_bucaRapida, op_bruteForce;
 
 	int matriz1[4][4] = {
 		{0,   10, 15,  20},
@@ -106,109 +113,116 @@ int main(){
 		{1972, 579, 1260, 987, 371, 999, 701, 2099, 600, 1162, 1200, 504, 0}
 	};
 
-
 	mallocar();
 	do {
-		system("clear || cls");
 		op = menu();
-		FLVazia(&l);
 		printf("\n");
 
-		switch(op) {
-			case 1:
-				tam = sizeof(matriz1[0]) / sizeof(int);
+		if(op == 0) {
+			printf("O programa sera finalizado!\n");
+			return EXIT_SUCCESS;
+		}
+		else if(op == 1) {
+			bruteForce(bruteForceMenu());
+		} 
+		else if(op == 2) {
+			FLVazia(&l);
+			op_bucaRapida = buscaRapidaMenu();
 
-				for(int i = 0; i < tam; i++) {
-					for(int j = 0; j < tam; j++) {
-						item.valor = matriz1[i][j];
-						LInsere(&l, item);
-					}
-				}
-				resultado(&l, tam);
-			break;
-			case 2:
-				tam = sizeof(matriz2[0]) / sizeof(int);
+			switch(op_bucaRapida) {
+				case 1:
+					tam = sizeof(matriz1[0]) / sizeof(int);
 
-				for(int i = 0; i < tam; i++) {
-					for(int j = 0; j < tam; j++) {
-						item.valor = matriz2[i][j];
-						LInsere(&l, item);
+					for(int i = 0; i < tam; i++) {
+						for(int j = 0; j < tam; j++) {
+							item.valor = matriz1[i][j];
+							LInsere(&l, item);
+						}
 					}
-				}
-				resultado(&l, tam);
-			break;
-			case 3:
-				tam = sizeof(matriz3[0]) / sizeof(int);
+					resultado(&l, tam);
+				break;
+				case 2:
+					tam = sizeof(matriz2[0]) / sizeof(int);
 
-				for(int i = 0; i < tam; i++) {
-					for(int j = 0; j < tam; j++) {
-						item.valor = matriz3[i][j];
-						LInsere(&l, item);
+					for(int i = 0; i < tam; i++) {
+						for(int j = 0; j < tam; j++) {
+							item.valor = matriz2[i][j];
+							LInsere(&l, item);
+						}
 					}
-				}
-				resultado(&l, tam);
-			break;
-			case 4:
-				tam = sizeof(matriz3_1[0]) / sizeof(int);
+					resultado(&l, tam);
+				break;
+				case 3:
+					tam = sizeof(matriz3[0]) / sizeof(int);
 
-				for(int i = 0; i < tam; i++) {
-					for(int j = 0; j < tam; j++) {
-						item.valor = matriz3_1[i][j];
-						LInsere(&l, item);
+					for(int i = 0; i < tam; i++) {
+						for(int j = 0; j < tam; j++) {
+							item.valor = matriz3[i][j];
+							LInsere(&l, item);
+						}
 					}
-				}
-				resultado(&l, tam);
-			break;
-			case 5:
-				tam = sizeof(matriz4[0]) / sizeof(int);
+					resultado(&l, tam);
+				break;
+				case 4:
+					tam = sizeof(matriz3_1[0]) / sizeof(int);
 
-				for(int i = 0; i < tam; i++) {
-					for(int j = 0; j < tam; j++) {
-						item.valor = matriz4[i][j];
-						LInsere(&l, item);
+					for(int i = 0; i < tam; i++) {
+						for(int j = 0; j < tam; j++) {
+							item.valor = matriz3_1[i][j];
+							LInsere(&l, item);
+						}
 					}
-				}
-				resultado(&l, tam);
-			break;
-			case 6:
-				tam = sizeof(matriz5[0]) / sizeof(int);
-				
-				for(int i = 0; i < tam; i++) {
-					for(int j = 0; j < tam; j++) {
-						item.valor = matriz5[i][j];
-						LInsere(&l, item);
-					}
-				}
-				resultado(&l, tam);
-			break;
-			case 7:
-				tam = sizeof(matriz6[0]) / sizeof(int);
+					resultado(&l, tam);
+				break;
+				case 5:
+					tam = sizeof(matriz4[0]) / sizeof(int);
 
-				for(int i = 0; i < tam; i++) {
-					for(int j = 0; j < tam; j++) {
-						item.valor = matriz6[i][j];
-						LInsere(&l, item);
+					for(int i = 0; i < tam; i++) {
+						for(int j = 0; j < tam; j++) {
+							item.valor = matriz4[i][j];
+							LInsere(&l, item);
+						}
 					}
-				}
-				resultado(&l, tam);
-			break;
-			case 8:
-				tam = sizeof(matriz7[0]) / sizeof(int);
+					resultado(&l, tam);
+				break;
+				case 6:
+					tam = sizeof(matriz5[0]) / sizeof(int);
+					
+					for(int i = 0; i < tam; i++) {
+						for(int j = 0; j < tam; j++) {
+							item.valor = matriz5[i][j];
+							LInsere(&l, item);
+						}
+					}
+					resultado(&l, tam);
+				break;
+				case 7:
+					tam = sizeof(matriz6[0]) / sizeof(int);
 
-				for(int i = 0; i < tam; i++) {
-					for(int j = 0; j < tam; j++) {
-						item.valor = matriz7[i][j];
-						LInsere(&l, item);
+					for(int i = 0; i < tam; i++) {
+						for(int j = 0; j < tam; j++) {
+							item.valor = matriz6[i][j];
+							LInsere(&l, item);
+						}
 					}
-				}
-				resultado(&l, tam);
-			break;
-			
-			case 0:
-				printf("O programa sera finalizado!\n");
-				return EXIT_SUCCESS;
-			default:
-				printf("Opcao invalida!\n");
+					resultado(&l, tam);
+				break;
+				case 8:
+					tam = sizeof(matriz7[0]) / sizeof(int);
+
+					for(int i = 0; i < tam; i++) {
+						for(int j = 0; j < tam; j++) {
+							item.valor = matriz7[i][j];
+							LInsere(&l, item);
+						}
+					}
+					resultado(&l, tam);
+				break;
+				default:
+					printf("\nOpcao invalida!\n");
+			}
+		} else {
+			printf("Opcao invalida!\n");
 		}
 		system("read -p \"\nPressione enter para continuar...\" continue");
 	} while(op != 0);
@@ -219,8 +233,126 @@ int main(){
 int menu() {
 	int op;
 
+	system("clear || cls");
 	printf("====================\n");
-	printf("   MENU DE OPCOES\n");
+	printf("   TIPO ALGORITIMO\n");
+	printf("====================\n\n");
+	
+	printf("1 - Brute force\n");
+	printf("2 - Busca rapida\n");
+	printf("0 - Sair\n\n");
+
+	printf("Escolha uma opção: ");
+	scanf("%d", &op);
+
+	return op;
+}
+
+void bruteForce(int op) {
+	double time_spent=0;
+	int num_vertices, row, col;
+	char name[25];
+	int tam;
+	// int opcao=1;
+	
+	char cityName[][25] = {"Cidade 1", "Cidade 2", "Cidade 3", "Cidade 4", "Cidade 5", "Cidade 6", "Cidade 7", "Cidade 8", "Cidade 9", "Cidade 10", "Cidade 11", "Cidade 12", "Cidade 13", "Cidade 14", "Cidade 15", "Cidade 16", "Cidade 17", "Cidade 18"};
+
+	switch(op) {
+		case 1:
+			tam = 5;
+			strcpy(name, "vertice5-ex1");
+		break;
+		case 2:
+			tam = 5;
+			strcpy(name, "vertice5-ex2");
+		break;
+		case 3:
+			tam = 10;
+			strcpy(name, "vertice10");
+		break;
+		case 4:
+			tam = 13;
+			strcpy(name, "vertice13");
+		break;
+		case 5:
+			tam = 18;
+			strcpy(name, "vertice18");
+		break;
+		default:
+			printf("\nOpcao invalida!\n");
+			return;
+	}
+	
+	// while(opcao) {
+		// system("cls || clear");
+		// printf("======================\n        MENU\n======================\n\n1. Carregar grafo\n2. Sair\n\nEscolha uma opção:\t");
+		// scanf("%d", &opcao);
+		
+		// if(opcao==1) {
+			// system("cls || clear");
+			// printf("Entre a quantidade de vértices da matrix:\t");
+			// scanf("%d", &num_vertices);
+			num_vertices = tam;
+			
+			//-----------------DECLARATION OF VARIABLES THAT USE num_vertices
+			int min_path[num_vertices];
+			int cities[num_vertices];
+			int vertex[num_vertices];
+			
+			//-----------------INICIALIZE VECTORS
+			Inicialize(vertex, cities, min_path, num_vertices);
+			
+			//------------------GRAPH
+			row=num_vertices; col=num_vertices;
+			int *matrix[num_vertices];//alocando matrix
+			for(int i = 0; i < row; i++)
+				matrix[i] = (int*)malloc(col * sizeof(int));
+			
+			//-----------------READ GRAPH FROM FILE
+			int **graph = readGraph(matrix, num_vertices, name);
+			
+			//----------------PERMUTATION
+			int start=0, finish=num_vertices-1;
+			clock_t begin = clock();//execution time begin
+			
+			permutation(vertex, start, finish, graph, num_vertices, cities, min_path);
+			
+			clock_t end = clock();//execution time end
+			time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+			
+			//----------------RESULT
+			printf("\n\n--------------------------------------------------------------------------------------\n\n");
+			printf("Caminho mais curto passando por todos os vértices:\t%d \n", getMinPathWeight());
+			
+			printf("\n\nCaminho:\t");
+			for(int i=0; i<num_vertices; i++){ printf("%d ", min_path[i]); }//caminho
+			
+			printf("\n\n%s -> ", cityName[cities[num_vertices-1]]);//ultima cidade no array é o ponto de partida
+			for(int i=0; i<num_vertices; i++) {//cidades
+				if(i==num_vertices-1) printf("%s", cityName[cities[i]]);
+				else printf("%s -> ", cityName[cities[i]]);
+			}
+			
+			printf("\n\nTempo de execução:\t%f seconds", time_spent);
+			printf("\nTotal de combinações realizadas:\t%ld", getCurrentCombinacoes());
+			printf("\nPorcentagem concluída:\t%2.Lf%%", percentageExecution());
+			printf("\n");
+			
+			// printf("\n\n\nPressione qualquer tecla para continuar ...");getchar();
+			
+			for(int i=0; i<num_vertices; i++)
+				free(matrix[i]);
+		// } else
+		// 	opcao=0;
+	// }
+}
+
+int buscaRapidaMenu() {
+	int op;
+
+	system("clear || cls");
+	printf("====================\n");
+	printf(" MENU BUSCA SIMPLES\n");
 	printf("====================\n\n");
 	
 	printf("1 - Matriz 1   -> 4  vértices\n");
@@ -230,10 +362,29 @@ int menu() {
 	printf("5 - Matriz 4   -> 5  vértices\n");
 	printf("6 - Matriz 5   -> 18 vértices\n");
 	printf("7 - Matriz 6   -> 10 vértices\n");
-	printf("8 - Matriz 7   -> 13 vértices\n");
-	printf("0 - Sair\n\n");
+	printf("8 - Matriz 7   -> 13 vértices\n\n");
 
 	printf("Escolha uma opção: ");
+	scanf("%d", &op);
+
+	return op;
+}
+
+int bruteForceMenu() {
+	int op;
+
+	system("clear || cls");
+	printf("====================\n");
+	printf("  MENU BRUTE FORCE\n");
+	printf("====================\n\n");
+	
+	printf("1 - Arquivo 1  -> 5 vértices\n");
+	printf("2 - Arquivo 2  -> 5 vértices\n");
+	printf("3 - Arquivo 3  -> 10 vértices\n");
+	printf("4 - Arquivo 4  -> 13 vértices\n");
+	printf("5 - Arquivo 5  -> 18 vértices\n");
+
+	printf("\nEscolha uma opção: ");
 	scanf("%d", &op);
 
 	return op;

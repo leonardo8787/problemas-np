@@ -9,7 +9,7 @@
 #include <string.h>
 #include <time.h>
 
-int **readGraph(int **arr, int num_vertices);
+int **readGraph(int **arr, int num_vertices, char *name);
 void Inicialize(int *vertex, int *cities, int *min_path, int num_vertices);
 
 void travelingSalesmanProblem(int **graph, int *vertex, int num_vertices, int *cities, int *min_path);

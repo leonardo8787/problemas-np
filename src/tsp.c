@@ -81,15 +81,16 @@ void permutation(int *vertex, int start, int end, int **graph, int num_vertices,
 	return;
 }
 
-int **readGraph(int **arr, int num_vertices) {
+int **readGraph(int **arr, int num_vertices, char *name) {
 	FILE *file;
-	char buffer[BUFFER_SIZE], bufferBackup[BUFFER_SIZE], fileName[15], path[50] = "./grafos/";
+	char buffer[BUFFER_SIZE], bufferBackup[BUFFER_SIZE], fileName[15];
+	char path[50] = "./grafos/";
 	char *token;
 	int i=0;
 	
-	printf("Entre o nome do arquivo:\t");
-	scanf("%s", fileName);
-	strcat(path, fileName);
+	// printf("Entre o nome do arquivo:\t");
+	// scanf("%s", fileName);
+	strcat(path, name);
 	file = fopen(path, "r");
 
 	while(fgets(buffer, BUFFER_SIZE, file) != NULL) {
@@ -103,16 +104,16 @@ int **readGraph(int **arr, int num_vertices) {
 		i++;
 	}
 	fclose(file);
-	printf("\n\n");
-	for(int i=0; i<num_vertices; i++) {
-		for(int j=0; j<num_vertices; j++) {
-			printf("%d ", arr[i][j]);
-		}
-		printf("\n");
-	}
+	// printf("\n\n");
+	// for(int i=0; i<num_vertices; i++) {
+	// 	for(int j=0; j<num_vertices; j++) {
+	// 		printf("%d ", arr[i][j]);
+	// 	}
+	// 	printf("\n");
+	// }
 	
-	printf("\n\nPressione qualquer tecla para continuar ...");getchar();while(getchar() != '\n');
-	system("cls || clear");
+	// printf("\n\nPressione qualquer tecla para continuar ...");getchar();while(getchar() != '\n');
+	// system("cls || clear");
 	return arr;
 }
 
