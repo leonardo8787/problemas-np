@@ -56,7 +56,7 @@ Para ilustrar o problema, observe a imagem:
 
 ## **FUNCIONAMENTO**
 
-- O método de busca rápida para resolver o problema utiliza o sistema de backtracking
+- O método de Busca Rápida para resolver o problema utiliza o sistema de backtracking, que auxilia ao percorrer o grafo fazendo isso uma única vez e em um único caminho, que já indica o menor caminho possível. Porém, fazendo isso ele descarta outras possibilidades por elas serem "redundantes" já que mudam a rota mas não o tamanho. Desse modo, essa é a explicação resumida do motivo de sua execução levar um tempo inferior, principalmente considerando os grafos com maiores quantidades de vértices. Já o método Brute Force testa todas as possibilidades da menor rota entre os vértices e por isso leva um tempo superior de execução.
 
 ## **REFERÊNCIAS**
 
