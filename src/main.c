@@ -14,12 +14,10 @@ void resultado(Lista *l, int tam);
 
 int main(){
 	int **matriz;
-	double inicio = clock();
-	
+
 	Lista l;
-	Item item;
 	int op, tam;
-	int op_bucaRapida, op_bruteForce;
+	int op_bucaRapida;
 
 	mallocar();
 
@@ -56,7 +54,7 @@ int main(){
 int menu() {
 	int op;
 
-	system("clear || cls");
+	system("clear");
 	printf("====================\n");
 	printf("   TIPO ALGORITIMO\n");
 	printf("====================\n\n");
@@ -73,7 +71,7 @@ int menu() {
 
 void bruteForce(int op) {
 	double time_spent=0;
-	int num_vertices, row, col;
+	int num_vertices = 0, row, col;
 	char name[25];
 	
 	switch(op) {
@@ -140,7 +138,7 @@ void bruteForce(int op) {
 int buscaRapidaMenu() {
 	int op;
 
-	system("clear || cls");
+	system("clear");
 	printf("====================\n");
 	printf(" MENU BUSCA SIMPLES\n");
 	printf("====================\n\n");
@@ -163,7 +161,7 @@ int buscaRapidaMenu() {
 int bruteForceMenu() {
 	int op;
 
-	system("clear || cls");
+	system("clear");
 	printf("====================\n");
 	printf("  MENU BRUTE FORCE\n");
 	printf("====================\n\n");
@@ -181,8 +179,10 @@ int bruteForceMenu() {
 }
 
 void resultado(Lista *l, int tam) {
+	clock_t time = clock();
 	iniciaVetores(tam);
 	preencheMatriz(l);
 	caixeiroViajante(0);
 	imprimir();
+	printf("Tempo: %lfs\n", (clock() - time) / (double)CLOCKS_PER_SEC);
 }

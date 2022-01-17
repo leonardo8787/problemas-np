@@ -66,7 +66,7 @@ void permutation(int *vertex, int start, int end, int **graph, int num_vertices,
 		travelingSalesmanProblem(graph, vertex, num_vertices, cities, min_path);
 		current_combinacoes++;
 		if(current_combinacoes % num == 0) {//imprime porcentagem a cada 10000 combinaçoes realizadas
-			system("cls || clear");
+			system("clear");
 			printf("------- INFO durante execução -------\n");
 			printf("\nPorcentagem concluída:\t%2.Lf%% \n", percentageExecution());
 			printf("Combinações realizadas:\t%ld \n", current_combinacoes);
@@ -88,8 +88,6 @@ int **readGraph(int **arr, int num_vertices, char *name) {
 	char *token;
 	int i=0;
 	
-	// printf("Entre o nome do arquivo:\t");
-	// scanf("%s", fileName);
 	strcat(path, name);
 	file = fopen(path, "r");
 
@@ -104,16 +102,6 @@ int **readGraph(int **arr, int num_vertices, char *name) {
 		i++;
 	}
 	fclose(file);
-	// printf("\n\n");
-	// for(int i=0; i<num_vertices; i++) {
-	// 	for(int j=0; j<num_vertices; j++) {
-	// 		printf("%d ", arr[i][j]);
-	// 	}
-	// 	printf("\n");
-	// }
-	
-	// printf("\n\nPressione qualquer tecla para continuar ...");getchar();while(getchar() != '\n');
-	// system("cls || clear");
 	return arr;
 }
 
@@ -132,7 +120,10 @@ void printMatrix(int **matrix, int num_vertices) {
 	printf("\nMatrix:\n\n");
 	for(int i=0; i<num_vertices; i++) {// matriz
 		for(int j=0; j<num_vertices; j++) {
-			printf("%6d ", matrix[i][j]);
+			if (matrix[i][j] == 9999 || matrix[i][j] == 999999)
+				printf("   - ");
+			else
+				printf("%4d ", matrix[i][j]);
 		}
 		printf("\n");
 	}
